@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kingdom Builders Movement™ — Stop Scrolling. Start Building.</title>
+<meta name="description" content="Created by God. Called to build. Stop scrolling, start building — the movement, the book, and the gear for Kingdom builders." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Kaushan+Script&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0B0C; --ink-2:#141416; --panel:#1B1B1E; --panel-2:#212125;
+    --gold:#E5A928; --gold-deep:#B47E17; --gold-soft:rgba(229,169,40,.16);
+    --bone:#F4F1E9; --muted:#97928A; --line:rgba(229,169,40,.22);
+    --hairline:rgba(244,241,233,.10);
+    --shadow:0 24px 60px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink); color:var(--bone);
+    font-family:"Barlow",system-ui,sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  h1,h2,h3{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.98}
+  .script{font-family:"Kaushan Script",cursive;text-transform:none;color:var(--gold);letter-spacing:0}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .gold{color:var(--gold)}
+  .eyebrow{font-family:"Barlow";font-weight:700;text-transform:uppercase;letter-spacing:.32em;font-size:12.5px;color:var(--gold)}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Barlow";font-weight:800;
+    text-transform:uppercase;letter-spacing:.06em;font-size:15px;padding:15px 26px;border-radius:2px;
+    cursor:pointer;border:2px solid transparent;transition:transform .15s ease,background .2s ease,color .2s ease}
+  .btn-gold{background:var(--gold);color:#171307;border-color:var(--gold)}
+  .btn-gold:hover{transform:translateY(-2px);background:#f2b93a}
+  .btn-ghost{background:transparent;color:var(--bone);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+  /* ---------- nav ---------- */
+  header{position:sticky;top:0;z-index:60;background:rgba(11,11,12,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:"Anton";text-transform:uppercase;
+    font-size:19px;letter-spacing:.02em}
+  .brand .tm{font-size:10px;vertical-align:super;color:var(--gold)}
+  .brand svg{width:26px;height:26px}
+  .navlinks{display:flex;align-items:center;gap:30px;font-weight:600;font-size:14.5px;
+    text-transform:uppercase;letter-spacing:.08em}
+  .navlinks a{color:var(--muted);transition:color .2s}
+  .navlinks a:hover{color:var(--bone)}
+  .cart-btn{position:relative;background:none;border:none;cursor:pointer;color:var(--bone);display:flex;align-items:center;gap:8px;
+    font-family:"Barlow";font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px}
+  .cart-count{position:absolute;top:-9px;right:-12px;min-width:19px;height:19px;padding:0 5px;border-radius:20px;
+    background:var(--gold);color:#171307;font-size:11px;font-weight:800;display:grid;place-items:center;line-height:1}
+  .navtoggle{display:none;background:none;border:none;color:var(--bone);cursor:pointer}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:84px 0 72px;overflow:hidden}
+  .blueprint{position:absolute;inset:0;z-index:0;
+    background-image:linear-gradient(var(--hairline) 1px,transparent 1px),linear-gradient(90deg,var(--hairline) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 75% at 30% 35%,#000 0%,transparent 78%);
+            mask-image:radial-gradient(ellipse 90% 75% at 30% 35%,#000 0%,transparent 78%);
+    opacity:.6}
+  .hero .glow{position:absolute;right:-8%;bottom:-30%;width:60%;height:120%;z-index:0;
+    background:radial-gradient(circle,rgba(229,169,40,.14),transparent 62%);filter:blur(6px)}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+  .hero h1{font-size:clamp(52px,8.5vw,104px);margin:18px 0 8px}
+  .hero h1 .lite{color:var(--bone)}
+  .hero h1 .go{color:var(--gold)}
+  .hero .lede{font-size:19px;color:var(--muted);max-width:34ch;margin:16px 0 30px}
+  .hero .lede b{color:var(--bone);font-weight:700}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-art{position:relative;border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+  .hero-art img{width:100%;height:100%;object-fit:cover}
+  .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(11,11,12,.35))}
+  .crownrule{display:flex;align-items:center;gap:14px;color:var(--gold)}
+  .crownrule .r{height:2px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-deep))}
+  .crownrule .r.l{background:linear-gradient(90deg,var(--gold-deep),transparent)}
+  .crownrule svg{width:30px;height:22px}
+
+  /* ---------- manifesto strip ---------- */
+  .manifesto{background:var(--gold);color:#171307;padding:0}
+  .manifesto .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+  .man-item{display:flex;align-items:center;gap:16px;padding:26px 22px;border-right:1px solid rgba(23,19,7,.18)}
+  .man-item:last-child{border-right:none}
+  .man-item svg{width:38px;height:38px;flex-shrink:0}
+  .man-item .k{font-family:"Anton";text-transform:uppercase;font-size:22px;line-height:1}
+  .man-item .s{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:12.5px;margin-top:3px}
+
+  /* ---------- section shell ---------- */
+  section{position:relative}
+  .sec{padding:96px 0}
+  .sec-head{max-width:720px;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(34px,5vw,58px);margin:12px 0 0}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:18px}
+
+  /* ---------- ladder ---------- */
+  .ladder{background:var(--ink-2);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+  .rungs{display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+  .rung{padding:30px 20px;border-right:1px solid var(--hairline);position:relative}
+  .rung:last-child{border-right:none}
+  .rung .no{font-family:"Anton";font-size:14px;color:var(--gold-deep);letter-spacing:.1em}
+  .rung svg{width:40px;height:40px;margin:16px 0 14px;color:var(--gold)}
+  .rung h3{font-size:24px}
+  .rung p{color:var(--muted);font-size:14.5px;margin-top:8px;line-height:1.45}
+
+  /* ---------- book ---------- */
+  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .book-art{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .book-art img{width:100%}
+  .youdont{list-style:none;margin:26px 0 30px}
+  .youdont li{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--hairline);font-size:17px}
+  .youdont li:last-child{border-bottom:none}
+  .youdont .x{color:var(--gold);font-family:"Anton";font-size:20px;line-height:1.2}
+  .youdont b{color:var(--bone)}
+  .forwho{color:var(--muted);font-size:16px;margin-top:6px}
+  .forwho b{color:var(--bone);font-weight:700}
+
+  /* ---------- store ---------- */
+  .store{background:var(--ink-2);border-top:1px solid var(--hairline)}
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{background:var(--panel);border:1px solid var(--hairline);border-radius:4px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .18s ease,border-color .2s ease}
+  .card:hover{transform:translateY(-4px);border-color:var(--line)}
+  .card .ph{aspect-ratio:1/1;background:#fff;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover}
+  .card .body{padding:22px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--gold)}
+  .card h3{font-size:23px}
+  .card .blurb{color:var(--muted);font-size:14.5px;flex:1}
+  .card .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+  .card .price{font-family:"Anton";font-size:26px}
+  .card .add{background:var(--gold);color:#171307;border:none;font-family:"Barlow";font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;font-size:13px;padding:11px 18px;border-radius:2px;cursor:pointer;transition:background .2s}
+  .card .add:hover{background:#f2b93a}
+  .card .add.added{background:#2c2c30;color:var(--gold)}
+
+  /* ---------- cart drawer ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s;z-index:90}
+  .overlay.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:var(--ink-2);
+    border-left:1px solid var(--line);z-index:100;transform:translateX(105%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .drawer.open{transform:translateX(0)}
+  .drawer-h{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--hairline)}
+  .drawer-h h3{font-size:22px}
+  .drawer-h button{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+  .drawer-h button:hover{color:var(--bone)}
+  .lines{flex:1;overflow-y:auto;padding:12px 24px}
+  .empty{color:var(--muted);text-align:center;padding:60px 10px;font-size:15px}
+  .line{display:grid;grid-template-columns:58px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--hairline)}
+  .line .thumb{width:58px;height:58px;border-radius:3px;overflow:hidden;background:#fff}
+  .line .thumb img{width:100%;height:100%;object-fit:cover}
+  .line .nm{font-weight:700;font-size:15px}
+  .line .qty{display:flex;align-items:center;gap:10px;margin-top:6px}
+  .line .qty button{width:24px;height:24px;border:1px solid var(--line);background:none;color:var(--bone);cursor:pointer;border-radius:2px;font-size:15px;line-height:1}
+  .line .qty span{min-width:18px;text-align:center;font-weight:700}
+  .line .lp{font-family:"Anton";font-size:18px}
+  .drawer-f{padding:22px 24px;border-top:1px solid var(--hairline)}
+  .subtotal{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .subtotal .lbl{text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:13px;color:var(--muted)}
+  .subtotal .amt{font-family:"Anton";font-size:30px}
+  .drawer-f .note{color:var(--muted);font-size:12.5px;margin:8px 0 16px}
+  .drawer-f .btn{width:100%;justify-content:center}
+
+  /* ---------- join ---------- */
+  .join{background:linear-gradient(180deg,var(--ink),#0e0e10);border-top:1px solid var(--hairline);text-align:center}
+  .join h2{font-size:clamp(34px,5.4vw,62px)}
+  .join p{color:var(--muted);max-width:52ch;margin:16px auto 30px;font-size:18px}
+  .joinform{display:flex;gap:12px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .joinform input{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--line);color:var(--bone);
+    padding:15px 18px;border-radius:2px;font-family:"Barlow";font-size:16px}
+  .joinform input::placeholder{color:var(--muted)}
+  .joinform input:focus{outline:none;border-color:var(--gold)}
+  .join .said{color:var(--gold);font-weight:700;margin-top:18px;min-height:22px}
+  .tagband{margin-top:44px;font-family:"Anton";text-transform:uppercase;font-size:clamp(20px,3vw,30px);color:var(--muted)}
+  .tagband b{color:var(--gold)}
+
+  /* ---------- footer ---------- */
+  footer{background:#08080a;border-top:1px solid var(--hairline);padding:40px 0;color:var(--muted);font-size:13.5px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .brand{font-size:17px;color:var(--bone)}
+  .foot a{color:var(--muted)}
+  .foot a:hover{color:var(--gold)}
+
+  /* ---------- modal ---------- */
+  .modal{position:fixed;inset:0;z-index:120;display:none;place-items:center;background:rgba(0,0,0,.7);padding:24px}
+  .modal.open{display:grid}
+  .modal .box{background:var(--ink-2);border:1px solid var(--line);border-radius:4px;max-width:460px;width:100%;padding:30px;box-shadow:var(--shadow)}
+  .modal h3{font-size:26px;margin-bottom:12px}
+  .modal p{color:var(--muted);font-size:15px;margin-bottom:8px}
+  .modal .ord{background:var(--panel);border:1px solid var(--hairline);border-radius:3px;padding:14px 16px;margin:14px 0;font-size:14.5px}
+  .modal .ord div{display:flex;justify-content:space-between;padding:3px 0}
+  .modal .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .modal .actions .btn{flex:1;justify-content:center}
+
+  @media (max-width:900px){
+    .hero-grid,.book-grid{grid-template-columns:1fr}
+    .hero-art{order:-1}
+    .manifesto .wrap{grid-template-columns:1fr}
+    .man-item{border-right:none;border-bottom:1px solid rgba(23,19,7,.18)}
+    .man-item:last-child{border-bottom:none}
+    .rungs{grid-template-columns:repeat(2,1fr)}
+    .rung:nth-child(2n){border-right:none}
+    .products{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:620px){
+    .navlinks{display:none}
+    .products{grid-template-columns:1fr}
+    .rungs{grid-template-columns:1fr}
+    .rung{border-right:none}
+    .sec{padding:70px 0}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="Kingdom Builders Movement home">
+      <svg viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M2 21h28M4 21l2-12 6 6 4-9 4 9 6-6 2 12" stroke="#E5A928" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      Kingdom Builders<span class="tm">™</span>
+    </a>
+    <nav class="navlinks">
+      <a href="#manifesto">Movement</a>
+      <a href="#path">The Path</a>
+      <a href="#book">The Book</a>
+      <a href="#store">Store</a>
+      <a href="#join">Join</a>
+    </nav>
+    <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h2l2.4 12.4a1 1 0 0 0 1 .8h8.7a1 1 0 0 0 1-.8L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="18" cy="20" r="1.4" fill="currentColor"/></svg>
+      Cart<span class="cart-count" id="cartCount" style="display:none">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<a id="top"></a>
+<section class="hero">
+  <div class="blueprint"></div>
+  <div class="glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="crownrule"><span class="r l"></span>
+        <svg viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M2 21h28M4 21l2-12 6 6 4-9 4 9 6-6 2 12" stroke="#E5A928" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <span class="r"></span></div>
+      <p class="eyebrow" style="margin-top:20px">The Kingdom Builders Movement™</p>
+      <h1><span class="lite">Stop scrolling.</span><br><span class="go">Start building.</span></h1>
+      <p class="lede"><b>Created by God. Called to build.</b> You don't need a degree or a line of code — just a problem worth solving and the courage to begin.</p>
+      <div class="hero-cta">
+        <a href="#join" class="btn btn-gold">Join the Movement</a>
+        <a href="#store" class="btn btn-ghost">Shop the Gear</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="images/brand-bottom.png" alt="The Kingdom Builders Movement — stop scrolling, start building, build what heaven has shown you" />
+    </div>
+  </div>
+</section>
+
+<!-- ===== MANIFESTO STRIP ===== -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap">
+    <div class="man-item">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5" stroke="#171307" stroke-width="1.8"/><path d="M4 4l16 16" stroke="#171307" stroke-width="2" stroke-linecap="round"/></svg>
+      <div><div class="k">Stop Scrolling</div><div class="s">Consuming isn't creating</div></div>
+    </div>
+    <div class="man-item">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 21h16M6 21V7l9-3v17M6 9l9-3M9 12h3M9 15h3" stroke="#171307" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><div class="k">Start Building</div><div class="s">Move from idea to launch</div></div>
+    </div>
+    <div class="man-item">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21h18M4 21v-4h4v4M10 21v-7h4v7M16 21v-4h4v4M4 13l8-9 8 9" stroke="#171307" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><div class="k">Build the Vision</div><div class="s">What heaven has shown you</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PATH (ladder) ===== -->
+<section class="ladder" id="path">
+  <div class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">Idea → Blueprint → Legacy</p>
+      <h2>The builder's path</h2>
+      <p>Every solution moves through the same six stages. This is the arc of the book, and the arc of the work.</p>
+    </div>
+    <div class="rungs">
+      <div class="rung"><span class="no">01</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c1 1 1.5 2 1.5 3h5c0-1 .5-2 1.5-3A6 6 0 0 0 12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Vision</h3><p>See the problem worth solving and name the solution God placed in you.</p></div>
+      <div class="rung"><span class="no">02</span>
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 3h6v3H9zM8.5 11l1.5 1.5L13 9.5M8.5 16l1.5 1.5L13 14.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Plan</h3><p>Turn the vision into a blueprint — the smallest first version you can build.</p></div>
+      <div class="rung"><span class="no">03</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v3M12 19v3M4 12H1M23 12h-3M6 6L4 4M18 6l2-2M6 18l-2 2M18 18l2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.7"/></svg>
+        <h3>Build</h3><p>Ship the first version. Done beats perfect — you refine what already exists.</p></div>
+      <div class="rung"><span class="no">04</span>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>
+        <h3>Focus</h3><p>Serve one audience deeply before you try to serve everyone shallowly.</p></div>
+      <div class="rung"><span class="no">05</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 20h18L15 8l-3 5-2.5-3L3 20Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3>Overcome</h3><p>Push through the doubt, the learning curve, and the fear of being too late.</p></div>
+      <div class="rung"><span class="no">06</span>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Impact</h3><p>Reach the people who need what you built — and leave a lasting legacy.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE BOOK ===== -->
+<section class="sec" id="book">
+  <div class="wrap book-grid">
+    <div class="book-art" style="background:var(--panel);padding:48px 40px;display:flex;flex-direction:column;justify-content:center;min-height:360px;position:relative;overflow:hidden">
+      <div class="blueprint" style="opacity:.32"></div>
+      <svg viewBox="0 0 32 24" fill="none" style="width:46px;height:34px;position:relative" aria-hidden="true"><path d="M2 21h28M4 21l2-12 6 6 4-9 4 9 6-6 2 12" stroke="#E5A928" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <p style="font-family:'Anton';text-transform:uppercase;font-size:clamp(28px,3.6vw,44px);line-height:1.02;margin-top:22px;position:relative">Stop scrolling.<br><span class="gold">Start building.</span></p>
+      <p style="color:var(--muted);font-size:17px;margin-top:16px;position:relative;font-style:italic">"Let's build what Heaven has shown us."</p>
+    </div>
+    <div>
+      <p class="eyebrow">The Book</p>
+      <h2 style="font-size:clamp(34px,5vw,56px);margin-top:10px">Called <span class="script" style="font-size:.85em">to</span> Build</h2>
+      <p style="color:var(--muted);margin-top:14px;font-size:18px">A Kingdom guide to building with today's tools — including AI — without losing wisdom, integrity, and compassion at the center. This isn't a coding manual. It's a call.</p>
+      <ul class="youdont">
+        <li><span class="x">✕</span><span>You don't have to know how to <b>code</b>.</span></li>
+        <li><span class="x">✕</span><span>You don't have to be <b>young</b>.</span></li>
+        <li><span class="x">✕</span><span>You don't have to be a <b>technology expert</b>.</span></li>
+        <li><span class="x">✓</span><span style="color:var(--gold);font-weight:700">You need a problem worth solving and the courage to begin.</span></li>
+      </ul>
+      <p class="forwho">Written for <b>pastors, educators, entrepreneurs, nonprofit leaders, professionals, retirees</b> — and every dreamer ready to become a builder.</p>
+      <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap">
+        <a href="#join" class="btn btn-gold">Get the Book</a>
+        <a href="#store" class="btn btn-ghost">Get the Gear</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORE ===== -->
+<section class="store" id="store">
+  <div class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">Built on Purpose. Backed by Faith.</p>
+      <h2>The gear</h2>
+      <p>Wear the calling. Every piece is a reminder to keep building what heaven has shown you.</p>
+    </div>
+    <div class="products" id="products"><!-- rendered by JS --></div>
+  </div>
+</section>
+
+<!-- ===== JOIN ===== -->
+<section class="sec join" id="join">
+  <div class="wrap">
+    <p class="eyebrow">The Kingdom Builders Movement™</p>
+    <h2 style="margin-top:14px">Join the builders</h2>
+    <p>Get the book launch, new drops, and build-along resources first. No noise — just what you need to start building.</p>
+    <div class="joinform">
+      <input type="email" id="joinEmail" placeholder="Your email address" aria-label="Email address" />
+      <button class="btn btn-gold" id="joinBtn">I'm In</button>
+    </div>
+    <div class="said" id="joinSaid" role="status"></div>
+    <div class="tagband">Created by <b>God</b>. Called to <b>Build</b>.</div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand">Kingdom Builders Movement™</div>
+    <div>Stop scrolling. Start building.</div>
+    <div>© <span id="yr"></span> · The Kingdom Builders Movement™</div>
+  </div>
+</footer>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="drawer-h"><h3>Your Cart</h3><button id="cartClose" aria-label="Close cart">×</button></div>
+  <div class="lines" id="lines"></div>
+  <div class="drawer-f">
+    <div class="subtotal"><span class="lbl">Subtotal</span><span class="amt" id="subtotal">$0</span></div>
+    <p class="note" id="cartNote">Shipping and tax calculated at checkout.</p>
+    <button class="btn btn-gold" id="checkout">Checkout</button>
+  </div>
+</aside>
+
+<!-- ===== ORDER MODAL (payment-not-connected fallback) ===== -->
+<div class="modal" id="modal">
+  <div class="box">
+    <h3>Your order</h3>
+    <p>Online checkout isn't connected yet. Here's your order — send it below and we'll get back to you, or connect a payment link to go live.</p>
+    <div class="ord" id="modalOrder"></div>
+    <div class="actions">
+      <a class="btn btn-gold" id="emailOrder">Email My Order</a>
+      <button class="btn btn-ghost" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   STORE CONFIG  —  edit these when you're ready to sell
+   ------------------------------------------------------------
+   • Set contactEmail to where orders should go.
+   • When you have a Stripe Payment Link or Gumroad link, either:
+       - put one link in STORE.checkoutUrl (whole-cart checkout), OR
+       - give each product its own buyUrl below.
+   • Prices are in whole dollars — change freely.
+   ============================================================ */
+const STORE = {
+  currency: "$",
+  contactEmail: "hello@kingdombuildersmovement.com",
+  checkoutUrl: ""   // e.g. "https://buy.stripe.com/xxxx"  (leave "" until ready)
+};
+
+const PRODUCTS = [
+  { id:"hoodie", name:"Builder Mode Hoodie", price:54, img:"images/hoodie.png",
+    tag:"Apparel", blurb:"Builder Mode: Activated. Vision, Plan, Build, Focus, Overcome, Impact — down the back.", buyUrl:"" },
+  { id:"mug", name:"Coffee. Prayer. Build. Mug", price:22, img:"images/mug.png",
+    tag:"Drinkware", blurb:"Coffee. Prayer. Build. Repeat. The daily rhythm of a Kingdom builder, 11oz.", buyUrl:"" },
+  { id:"cap", name:"BUILD. Dad Cap", price:32, img:"images/cap.png",
+    tag:"Headwear", blurb:"One word, embroidered in gold. A quiet reminder of the assignment.", buyUrl:"" }
+];
+
+/* ---------- state ---------- */
+const cart = new Map();  // id -> qty
+const $ = s => document.querySelector(s);
+const money = n => STORE.currency + n.toLocaleString();
+
+/* ---------- render products ---------- */
+function renderProducts(){
+  $("#products").innerHTML = PRODUCTS.map(p => `
+    <article class="card">
+      <div class="ph"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="body">
+        <span class="tag">${p.tag}</span>
+        <h3>${p.name}</h3>
+        <p class="blurb">${p.blurb}</p>
+        <div class="row">
+          <span class="price">${money(p.price)}</span>
+          <button class="add" data-id="${p.id}">Add to Cart</button>
+        </div>
+      </div>
+    </article>`).join("");
+  document.querySelectorAll(".add").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      addToCart(b.dataset.id);
+      b.textContent="Added ✓"; b.classList.add("added");
+      setTimeout(()=>{ b.textContent="Add to Cart"; b.classList.remove("added"); }, 1100);
+    });
+  });
+}
+
+/* ---------- cart ops ---------- */
+function addToCart(id){ cart.set(id,(cart.get(id)||0)+1); renderCart(); openCart(); }
+function setQty(id,q){ q<=0 ? cart.delete(id) : cart.set(id,q); renderCart(); }
+function totalCount(){ let n=0; cart.forEach(q=>n+=q); return n; }
+function subtotal(){ let s=0; cart.forEach((q,id)=>{ s += (PRODUCTS.find(p=>p.id===id).price)*q; }); return s; }
+
+function renderCart(){
+  const c = totalCount();
+  const badge = $("#cartCount");
+  badge.textContent=c; badge.style.display = c ? "grid" : "none";
+  const box = $("#lines");
+  if(cart.size===0){
+    box.innerHTML = `<div class="empty">Your cart is empty.<br>Every build starts with a first step — add something above.</div>`;
+  } else {
+    box.innerHTML = [...cart.entries()].map(([id,q])=>{
+      const p = PRODUCTS.find(x=>x.id===id);
+      return `<div class="line">
+        <div class="thumb"><img src="${p.img}" alt=""></div>
+        <div>
+          <div class="nm">${p.name}</div>
+          <div class="qty">
+            <button data-dec="${id}" aria-label="Decrease">−</button>
+            <span>${q}</span>
+            <button data-inc="${id}" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div class="lp">${money(p.price*q)}</div>
+      </div>`;
+    }).join("");
+    box.querySelectorAll("[data-inc]").forEach(b=>b.onclick=()=>setQty(b.dataset.inc,(cart.get(b.dataset.inc))+1));
+    box.querySelectorAll("[data-dec]").forEach(b=>b.onclick=()=>setQty(b.dataset.dec,(cart.get(b.dataset.dec))-1));
+  }
+  $("#subtotal").textContent = money(subtotal());
+}
+
+/* ---------- drawer ---------- */
+function openCart(){ $("#drawer").classList.add("open"); $("#overlay").classList.add("open"); $("#drawer").setAttribute("aria-hidden","false"); }
+function closeCart(){ $("#drawer").classList.remove("open"); $("#overlay").classList.remove("open"); $("#drawer").setAttribute("aria-hidden","true"); }
+$("#cartOpen").onclick=openCart; $("#cartClose").onclick=closeCart; $("#overlay").onclick=()=>{closeCart();closeModal();};
+
+/* ---------- checkout ---------- */
+$("#checkout").onclick=()=>{
+  if(cart.size===0){ return; }
+  if(STORE.checkoutUrl){ window.location.href = STORE.checkoutUrl; return; }
+  // no payment link yet -> show honest order summary + email fallback
+  const rows = [...cart.entries()].map(([id,q])=>{
+    const p=PRODUCTS.find(x=>x.id===id);
+    return `<div><span>${q} × ${p.name}</span><span>${money(p.price*q)}</span></div>`;
+  }).join("");
+  $("#modalOrder").innerHTML = rows + `<div style="border-top:1px solid var(--hairline);margin-top:6px;padding-top:8px;font-weight:800"><span>Total</span><span>${money(subtotal())}</span></div>`;
+  const body = [...cart.entries()].map(([id,q])=>{ const p=PRODUCTS.find(x=>x.id===id); return `${q} x ${p.name} — ${money(p.price*q)}`; }).join("%0D%0A");
+  $("#emailOrder").href = `mailto:${STORE.contactEmail}?subject=Kingdom%20Builders%20Order&body=I'd%20like%20to%20order:%0D%0A%0D%0A${body}%0D%0A%0D%0ATotal:%20${money(subtotal())}`;
+  openModal();
+};
+function openModal(){ $("#modal").classList.add("open"); }
+function closeModal(){ $("#modal").classList.remove("open"); }
+$("#modalClose").onclick=closeModal;
+
+/* ---------- join ---------- */
+$("#joinBtn").onclick=()=>{
+  const el=$("#joinEmail"); const v=el.value.trim();
+  const ok=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+  const said=$("#joinSaid");
+  if(!ok){ said.style.color="#e0714a"; said.textContent="Enter a valid email to join."; return; }
+  said.style.color="var(--gold)"; said.textContent="You're in. Welcome, builder. 👑";
+  el.value="";
+  // TODO: connect to your email provider (Mailchimp/ConvertKit/Beehiiv form action).
+};
+$("#joinEmail").addEventListener("keydown",e=>{ if(e.key==="Enter") $("#joinBtn").click(); });
+
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCart(); closeModal(); }});
+$("#yr").textContent=new Date().getFullYear();
+renderProducts(); renderCart();
+</script>
+</body>
+</html>
